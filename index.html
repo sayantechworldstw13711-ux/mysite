@@ -4,55 +4,226 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Sayan Biswas | Portfolio</title>
-  
-  <!-- This line connects to your style.css file -->
-  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-gradient: linear-gradient(135deg, #090d16 0%, #0f172a 50%, #1e1b4b 100%);
+      --card-bg: rgba(30, 41, 59, 0.6);
+      --card-border: rgba(255, 255, 255, 0.08);
+      --accent: #38bdf8;
+      --accent-glow: rgba(56, 189, 248, 0.35);
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --badge-bg: rgba(56, 189, 248, 0.12);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg-gradient);
+      background-attachment: fixed;
+      color: var(--text-main);
+      line-height: 1.6;
+      padding: 3rem 1rem;
+      min-height: 100vh;
+    }
+
+    .container {
+      max-width: 780px;
+      margin: 0 auto;
+    }
+
+    /* Header Profile Card */
+    header {
+      text-align: center;
+      padding: 3.5rem 2rem;
+      background: var(--card-bg);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-radius: 24px;
+      border: 1px solid var(--card-border);
+      margin-bottom: 2rem;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+    }
+
+    .img-wrapper {
+      position: relative;
+      display: inline-block;
+      margin-bottom: 1.25rem;
+    }
+
+    .profile-img {
+      width: 140px;
+      height: 140px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid var(--accent);
+      box-shadow: 0 0 25px var(--accent-glow);
+      display: block;
+    }
+
+    header h1 {
+      font-size: 2.5rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.5rem;
+    }
+
+    .tagline {
+      display: inline-block;
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--accent);
+      background: var(--badge-bg);
+      padding: 0.4rem 1.2rem;
+      border-radius: 100px;
+      border: 1px solid rgba(56, 189, 248, 0.25);
+    }
+
+    /* Content Cards */
+    .card {
+      background: var(--card-bg);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-radius: 20px;
+      padding: 2rem;
+      margin-bottom: 1.5rem;
+      border: 1px solid var(--card-border);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    }
+
+    .card-title {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--accent);
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
+    /* Recruitment Box */
+    .hiring-card {
+      background: linear-gradient(135deg, rgba(56, 189, 248, 0.15) 0%, rgba(99, 102, 241, 0.15) 100%);
+      border: 1px solid rgba(56, 189, 248, 0.3);
+    }
+
+    .hiring-card h2 {
+      color: #7dd3fc;
+    }
+
+    /* Skill Grid */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+
+    .skill-item {
+      background: rgba(15, 23, 42, 0.6);
+      border: 1px solid var(--card-border);
+      padding: 1.2rem;
+      border-radius: 14px;
+    }
+
+    .skill-item h3 {
+      font-size: 1rem;
+      font-weight: 700;
+      margin-bottom: 0.3rem;
+      color: var(--text-main);
+    }
+
+    .skill-item p {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+    }
+
+    /* Action Buttons */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--accent);
+      color: #090d16;
+      font-weight: 700;
+      padding: 0.85rem 1.8rem;
+      border-radius: 12px;
+      text-decoration: none;
+      margin-top: 1rem;
+      box-shadow: 0 4px 15px var(--accent-glow);
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 3.5rem;
+      color: var(--text-muted);
+      font-size: 0.85rem;
+    }
+  </style>
 </head>
 <body>
 
 <div class="container">
 
-  <!-- Header Section with Profile Photo -->
+  <!-- Main Profile Header -->
   <header>
-    <img src="mysite.jpg" alt="Sayan Biswas" class="profile-img">
+    <div class="img-wrapper">
+      <img src="mysite.jpg" alt="Sayan Biswas" class="profile-img">
+    </div>
     <h1>Sayan Biswas</h1>
-    <p class="subtitle">Aspiring Software Engineer & AMV Content Creator</p>
+    <div class="tagline">Tech Enthusiast & Creative Producer</div>
   </header>
 
-  <!-- Hiring Alert Box -->
-  <div class="hiring-box">
-    <h3>🎬 Currently Looking to Hire an Editor!</h3>
-    <p>I am actively searching for a skilled Video Editor to collaborate on AMV content. If you are interested, reach out via email below.</p>
+  <!-- Opportunity / Collaboration Callout -->
+  <div class="card hiring-card">
+    <div class="card-title">🎬 Open Opportunity: Video Editor</div>
+    <p>I am actively recruiting a creative <strong>Video Editor</strong> for AMV (Anime Music Video) production and visual projects. If you have strong timing, visual pacing, and sync skills, let's collaborate.</p>
   </div>
 
   <!-- About Section -->
   <div class="card">
-    <h2>🚀 About Me</h2>
+    <div class="card-title">⚡ About Me</div>
     <p>
-      Hello! I'm Sayan, a student passionate about technology and software engineering. While I am naturally an introvert, I thrive on deep focus, creative content creation, and problem-solving. Outside of academics, I create AMV (Anime Music Video) content and manage deal-making processes.
+      I focus on software engineering fundamentals and digital media production. Driven by deep concentration and analytical problem-solving, I bridge technical development with creative video sequencing and deal coordination.
     </p>
   </div>
 
-  <!-- Key Skills Section -->
+  <!-- Skills Breakdown Grid -->
   <div class="card">
-    <h2>💡 Core Competencies & Skills</h2>
-    <ul class="skills-list">
-      <li><strong>Deal-Making & Intermediary Negotiation:</strong> Excellent at facilitating smooth communication between parties and closing deals efficiently.</li>
-      <li><strong>Communication & Facilitation:</strong> Skilled at building clear understanding and connecting people effectively.</li>
-      <li><strong>AMV Content Creation:</strong> Passionate about video sequencing, music syncing, and visual storytelling.</li>
-      <li><strong>Software Engineering Path:</strong> Currently building foundational tech and development skills.</li>
-    </ul>
+    <div class="card-title">🚀 Core Capabilities</div>
+    <div class="skills-grid">
+      <div class="skill-item">
+        <h3>Negotiation & Strategy</h3>
+        <p>Facilitating seamless communication and managing partnerships efficiently.</p>
+      </div>
+      <div class="skill-item">
+        <h3>AMV & Visual Editing</h3>
+        <p>Precision audio-visual synchronization and storytelling composition.</p>
+      </div>
+      <div class="skill-item">
+        <h3>Software Development</h3>
+        <p>Building foundational programming and web architecture skills.</p>
+      </div>
+    </div>
   </div>
 
-  <!-- Contact Section -->
+  <!-- Contact Action Card -->
   <div class="card">
-    <h2>📬 Let's Connect</h2>
-    <p>Whether you are an editor looking to collaborate, or want to discuss project deals, feel free to reach out directly:</p>
-    <a href="mailto:SayanTechWorld.STW13711@gmail.com" class="btn">Send Me an Email</a>
+    <div class="card-title">📬 Get in Touch</div>
+    <p>Interested in collaborating on video editing, software projects, or business inquiries?</p>
+    <a href="mailto:SayanTechWorld.STW13711@gmail.com" class="btn">Reach Out via Email</a>
   </div>
 
   <footer>
-    <p>© Sayan Biswas. Built with precision and Hosted on GitHub Pages.</p>
+    <p>© Sayan Biswas • Built & Hosted on GitHub Pages</p>
   </footer>
 
 </div>
