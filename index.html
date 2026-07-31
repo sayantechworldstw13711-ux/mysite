@@ -3,40 +3,63 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Sayan Biswas | Portfolio & Hub</title>
+  <title>Sayan Biswas | Cybernetic Operating Hub v5.0</title>
+  
+  <!-- External High-Tech Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;700&family=Plus+Jakarta+Sans:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500;600;700&family=Orbitron:wght@500;700;900&family=Plus+Jakarta+Sans:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
   
   <style>
+    /* ==========================================================================
+       1. GLOBAL SYSTEM VARIABLES & ADVANCED RESETS
+       ========================================================================== */
     :root {
-      --bg: #030712;
-      --card-bg: rgba(15, 23, 42, 0.75);
-      --card-border: rgba(56, 189, 248, 0.18);
+      --bg-dark: #020617;
+      --card-bg: rgba(15, 23, 42, 0.78);
+      --card-border: rgba(56, 189, 248, 0.22);
+      --card-border-glow: rgba(168, 85, 247, 0.45);
       --accent-cyan: #38bdf8;
-      --accent-purple: #8b5cf6;
+      --accent-purple: #a855f7;
       --accent-pink: #ec4899;
+      --accent-green: #22c55e;
+      --accent-yellow: #eab308;
       --text-main: #f8fafc;
       --text-muted: #94a3b8;
+      --font-sans: 'Plus Jakarta Sans', sans-serif;
+      --font-mono: 'Fira Code', monospace;
+      --font-cyber: 'Orbitron', sans-serif;
     }
 
     * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
+      scroll-behavior: smooth;
     }
 
     body {
-      font-family: 'Plus Jakarta Sans', sans-serif;
-      background-color: var(--bg);
+      font-family: var(--font-sans);
+      background-color: var(--bg-dark);
       color: var(--text-main);
       min-height: 100vh;
       overflow-x: hidden;
       padding: 2rem 1rem;
+      position: relative;
     }
 
-    /* Background Interactive Particle Canvas */
-    #particles-canvas {
+    /* Custom Futuristic Scrollbar */
+    ::-webkit-scrollbar { width: 10px; }
+    ::-webkit-scrollbar-track { background: var(--bg-dark); }
+    ::-webkit-scrollbar-thumb { 
+      background: linear-gradient(180deg, var(--accent-cyan), var(--accent-purple)); 
+      border-radius: 5px; 
+    }
+
+    /* ==========================================================================
+       2. CANVASFX & MATRIX BACKDROP
+       ========================================================================== */
+    #bg-canvas, #matrix-canvas {
       position: fixed;
       top: 0;
       left: 0;
@@ -46,185 +69,283 @@
       pointer-events: none;
     }
 
+    #matrix-canvas { opacity: 0.15; display: none; }
+
+    .ambient-glow {
+      position: fixed;
+      width: 650px;
+      height: 650px;
+      border-radius: 50%;
+      filter: blur(150px);
+      opacity: 0.28;
+      z-index: -1;
+      pointer-events: none;
+      animation: floatGlow 14s infinite alternate ease-in-out;
+    }
+
+    .glow-1 { top: -15%; left: -15%; background: var(--accent-purple); }
+    .glow-2 { bottom: -15%; right: -15%; background: var(--accent-cyan); animation-delay: -7s; }
+
+    @keyframes floatGlow {
+      0% { transform: scale(1) translate(0, 0); }
+      100% { transform: scale(1.35) translate(60px, 60px); }
+    }
+
+    /* ==========================================================================
+       3. GLASSMORPHIC CONTAINER & CARD HUD
+       ========================================================================== */
     .container {
-      max-width: 900px;
+      max-width: 1000px;
       margin: 0 auto;
       position: relative;
       z-index: 1;
     }
 
-    /* Glassmorphism Containers */
-    .glass-card {
+    .hud-card {
       background: var(--card-bg);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
       border: 1px solid var(--card-border);
       border-radius: 24px;
       padding: 2.5rem;
       margin-bottom: 2rem;
-      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.65), inset 0 1px 0 rgba(255, 255, 255, 0.12);
       transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
       animation: fadeInUp 0.8s ease-out forwards;
       opacity: 0;
+      position: relative;
+      overflow: hidden;
     }
 
-    .glass-card:hover {
-      transform: translateY(-4px);
-      border-color: rgba(56, 189, 248, 0.4);
-      box-shadow: 0 25px 60px rgba(56, 189, 248, 0.12);
+    .hud-card:hover {
+      border-color: var(--card-border-glow);
+      box-shadow: 0 25px 65px rgba(168, 85, 247, 0.22);
     }
-
-    /* Entrance Staggering */
-    .glass-card:nth-child(1) { animation-delay: 0.1s; }
-    .glass-card:nth-child(2) { animation-delay: 0.25s; }
-    .glass-card:nth-child(3) { animation-delay: 0.4s; }
-    .glass-card:nth-child(4) { animation-delay: 0.55s; }
-    .glass-card:nth-child(5) { animation-delay: 0.7s; }
 
     @keyframes fadeInUp {
-      from { opacity: 0; transform: translateY(30px); }
+      from { opacity: 0; transform: translateY(40px); }
       to { opacity: 1; transform: translateY(0); }
     }
 
-    /* Header & Animated Profile Image */
-    header { text-align: center; }
+    .hud-card:nth-child(1) { animation-delay: 0.1s; }
+    .hud-card:nth-child(2) { animation-delay: 0.2s; }
+    .hud-card:nth-child(3) { animation-delay: 0.3s; }
+    .hud-card:nth-child(4) { animation-delay: 0.4s; }
+    .hud-card:nth-child(5) { animation-delay: 0.5s; }
+    .hud-card:nth-child(6) { animation-delay: 0.6s; }
 
-    .profile-frame {
+    /* ==========================================================================
+       4. HEADER & DYNAMIC AVATAR
+       ========================================================================== */
+    header { text-align: center; position: relative; }
+
+    .avatar-container {
       position: relative;
       display: inline-block;
       margin-bottom: 1.5rem;
     }
 
-    .profile-img {
-      width: 155px;
-      height: 155px;
+    .avatar-img {
+      width: 165px;
+      height: 165px;
       border-radius: 50%;
       object-fit: cover;
       position: relative;
       z-index: 2;
-      border: 2px solid rgba(255, 255, 255, 0.25);
-      animation: floatImage 4s ease-in-out infinite;
+      border: 2px solid rgba(255, 255, 255, 0.35);
+      animation: float3D 4.5s ease-in-out infinite;
     }
 
-    .profile-glow {
+    .avatar-ring {
       position: absolute;
-      top: -8px;
-      left: -8px;
-      right: -8px;
-      bottom: -8px;
+      top: -12px; left: -12px; right: -12px; bottom: -12px;
       background: linear-gradient(45deg, var(--accent-cyan), var(--accent-purple), var(--accent-pink));
       border-radius: 50%;
       z-index: 1;
-      filter: blur(18px);
-      opacity: 0.75;
-      animation: rotateGlow 6s linear infinite;
+      filter: blur(22px);
+      opacity: 0.85;
+      animation: rotateRing 8s linear infinite;
     }
 
-    @keyframes floatImage {
-      0%, 100% { transform: translateY(0px) rotate(0deg); }
-      50% { transform: translateY(-10px) rotate(1.5deg); }
+    @keyframes float3D {
+      0%, 100% { transform: translateY(0) rotate(0deg); }
+      50% { transform: translateY(-14px) rotate(2deg); }
     }
 
-    @keyframes rotateGlow {
+    @keyframes rotateRing {
       0% { transform: rotate(0deg); }
       100% { transform: rotate(360deg); }
     }
 
-    .title-wrapper {
+    .title-cyber {
+      font-family: var(--font-cyber);
       font-size: 2.8rem;
-      font-weight: 800;
-      letter-spacing: -0.03em;
+      font-weight: 900;
+      letter-spacing: -0.02em;
       margin-bottom: 0.4rem;
-      background: linear-gradient(135deg, #ffffff 0%, var(--accent-cyan) 100%);
+      background: linear-gradient(135deg, #ffffff 0%, var(--accent-cyan) 50%, var(--accent-purple) 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
 
-    .dynamic-sub {
-      font-family: 'Fira Code', monospace;
-      font-size: 1.05rem;
+    .typewriter-text {
+      font-family: var(--font-mono);
+      font-size: 1.1rem;
       color: var(--accent-cyan);
-      min-height: 28px;
+      min-height: 32px;
     }
 
-    /* Section Headings */
-    .card-title {
-      font-size: 1.35rem;
-      font-weight: 700;
-      margin-bottom: 1.25rem;
+    .hud-controls {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      margin-top: 1.5rem;
+      flex-wrap: wrap;
+    }
+
+    .control-pill {
+      background: rgba(15, 23, 42, 0.85);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      padding: 0.5rem 1.2rem;
+      border-radius: 100px;
+      font-family: var(--font-mono);
+      font-size: 0.82rem;
       display: flex;
       align-items: center;
-      gap: 0.75rem;
-      color: var(--text-main);
+      gap: 0.6rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
     }
 
-    .card-title span {
-      background: linear-gradient(90deg, var(--accent-cyan), var(--accent-purple));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
+    .control-pill:hover {
+      border-color: var(--accent-cyan);
+      background: rgba(56, 189, 248, 0.1);
     }
 
-    /* Hiring Announcement Box */
-    .hiring-card {
-      border: 1px solid rgba(139, 92, 246, 0.4);
-      background: linear-gradient(135deg, rgba(139, 92, 246, 0.12) 0%, rgba(56, 189, 248, 0.05) 100%);
-      position: relative;
+    .dot-online {
+      width: 9px; height: 9px;
+      background-color: var(--accent-green);
+      border-radius: 50%;
+      box-shadow: 0 0 10px var(--accent-green);
+      animation: blinkDots 1.5s infinite;
+    }
+
+    @keyframes blinkDots { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
+
+    /* ==========================================================================
+       5. INTERACTIVE TERMINAL ENGINE (CLI)
+       ========================================================================== */
+    .terminal-box {
+      background: #020617;
+      border: 1px solid rgba(56, 189, 248, 0.35);
+      border-radius: 18px;
       overflow: hidden;
+      font-family: var(--font-mono);
+      box-shadow: 0 12px 35px rgba(0,0,0,0.85);
     }
 
-    .hiring-card::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: -100%;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.12), transparent);
-      animation: shimmer 3.5s infinite;
-    }
-
-    @keyframes shimmer {
-      100% { left: 100%; }
-    }
-
-    /* Skill Bars */
-    .skill-bar-wrapper { margin-bottom: 1.25rem; }
-    .skill-bar-wrapper:last-child { margin-bottom: 0; }
-    
-    .skill-info {
+    .terminal-bar {
+      background: #0f172a;
+      padding: 0.8rem 1.2rem;
       display: flex;
-      justify-content: space-between;
-      font-size: 0.9rem;
-      font-family: 'Fira Code', monospace;
-      margin-bottom: 0.4rem;
+      align-items: center;
+      gap: 0.6rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
     }
 
-    .progress-line {
-      height: 8px;
+    .t-btn { width: 13px; height: 13px; border-radius: 50%; display: inline-block; }
+    .t-close { background: #ef4444; }
+    .t-min { background: #f59e0b; }
+    .t-max { background: #10b981; }
+
+    .terminal-content {
+      padding: 1.5rem;
+      min-height: 200px;
+      max-height: 280px;
+      overflow-y: auto;
+      font-size: 0.92rem;
+      color: #38bdf8;
+    }
+
+    .term-line { margin-bottom: 0.6rem; line-height: 1.5; }
+    .term-input-row { display: flex; align-items: center; gap: 0.6rem; margin-top: 0.6rem; }
+    
+    .term-field {
+      background: transparent;
+      border: none;
+      outline: none;
+      color: #fff;
+      font-family: var(--font-mono);
+      font-size: 0.92rem;
       width: 100%;
-      background: rgba(255, 255, 255, 0.08);
-      border-radius: 100px;
-      overflow: hidden;
-      position: relative;
     }
 
-    .progress-line span {
-      height: 100%;
-      display: block;
-      border-radius: 100px;
-      background: linear-gradient(90deg, var(--accent-cyan), var(--accent-purple));
+    /* ==========================================================================
+       6. AUDIO EQUALIZER & RECRUITMENT BANNER
+       ========================================================================== */
+    .recruitment-card {
+      border: 1px solid rgba(168, 85, 247, 0.45);
+      background: linear-gradient(135deg, rgba(168, 85, 247, 0.16) 0%, rgba(56, 189, 248, 0.06) 100%);
     }
 
-    /* Project / Portfolio Display Grid */
+    .eq-container {
+      display: flex;
+      align-items: flex-end;
+      gap: 5px;
+      height: 32px;
+    }
+
+    .eq-bar {
+      width: 6px;
+      background: linear-gradient(to top, var(--accent-cyan), var(--accent-purple));
+      border-radius: 3px;
+      animation: eqMotion 1.2s infinite ease-in-out alternate;
+    }
+
+    @keyframes eqMotion {
+      0% { height: 15%; }
+      100% { height: 100%; }
+    }
+
+    /* ==========================================================================
+       7. INTERACTIVE PROJECT FILTER TABS
+       ========================================================================== */
+    .filter-menu {
+      display: flex;
+      gap: 0.8rem;
+      margin-bottom: 1.5rem;
+      flex-wrap: wrap;
+    }
+
+    .tab-btn {
+      background: rgba(30, 41, 59, 0.6);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: var(--text-muted);
+      padding: 0.6rem 1.2rem;
+      border-radius: 10px;
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .tab-btn.active, .tab-btn:hover {
+      background: var(--accent-cyan);
+      color: #020617;
+      font-weight: 700;
+      border-color: var(--accent-cyan);
+      box-shadow: 0 0 15px rgba(56, 189, 248, 0.4);
+    }
+
     .project-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
       gap: 1.25rem;
     }
 
     .project-card {
-      background: rgba(30, 41, 59, 0.45);
-      border: 1px solid rgba(255, 255, 255, 0.06);
+      background: rgba(30, 41, 59, 0.5);
+      border: 1px solid rgba(255, 255, 255, 0.08);
       padding: 1.5rem;
       border-radius: 18px;
       transition: all 0.3s ease;
@@ -233,274 +354,395 @@
     .project-card:hover {
       background: rgba(56, 189, 248, 0.08);
       border-color: var(--accent-cyan);
-      transform: translateY(-2px);
+      transform: translateY(-4px);
     }
 
-    .project-tag {
-      font-family: 'Fira Code', monospace;
+    .card-tag {
+      font-family: var(--font-mono);
       font-size: 0.75rem;
       color: var(--accent-cyan);
-      background: rgba(56, 189, 248, 0.1);
-      padding: 0.2rem 0.6rem;
+      background: rgba(56, 189, 248, 0.12);
+      padding: 0.25rem 0.65rem;
       border-radius: 6px;
       display: inline-block;
-      margin-bottom: 0.75rem;
+      margin-bottom: 0.8rem;
     }
 
-    .project-card h4 {
-      font-size: 1.1rem;
-      margin-bottom: 0.4rem;
-    }
-
-    .project-card p {
-      font-size: 0.88rem;
-      color: var(--text-muted);
-      line-height: 1.6;
-    }
-
-    /* Glowing Action Button */
-    .btn-neon {
-      display: inline-block;
-      padding: 0.95rem 2.2rem;
+    /* ==========================================================================
+       8. BUTTONS, MODAL & FOOTER
+       ========================================================================== */
+    .btn-action {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.8rem;
+      padding: 1.1rem 2.6rem;
       border-radius: 14px;
       background: linear-gradient(135deg, var(--accent-cyan), var(--accent-purple));
-      color: #030712;
+      color: #020617;
       font-weight: 800;
+      font-size: 1rem;
       text-decoration: none;
       letter-spacing: 0.5px;
-      box-shadow: 0 0 25px rgba(56, 189, 248, 0.35);
+      box-shadow: 0 0 35px rgba(56, 189, 248, 0.4);
       transition: all 0.3s ease;
-      margin-top: 1rem;
+      border: none;
+      cursor: pointer;
     }
 
-    .btn-neon:hover {
-      transform: translateY(-3px) scale(1.02);
-      box-shadow: 0 0 40px rgba(139, 92, 246, 0.6);
+    .btn-action:hover {
+      transform: translateY(-4px) scale(1.02);
+      box-shadow: 0 0 50px rgba(168, 85, 247, 0.75);
+    }
+
+    /* Interactive Modal */
+    .modal-overlay {
+      position: fixed;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(2, 6, 23, 0.85);
+      backdrop-filter: blur(12px);
+      z-index: 999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: all 0.4s ease;
+    }
+
+    .modal-overlay.open { opacity: 1; pointer-events: all; }
+
+    .modal-card {
+      background: #0f172a;
+      border: 1px solid var(--accent-cyan);
+      border-radius: 20px;
+      padding: 2.5rem;
+      max-width: 500px;
+      width: 90%;
+      box-shadow: 0 0 50px rgba(56, 189, 248, 0.3);
+      position: relative;
     }
 
     footer {
       text-align: center;
-      padding: 2.5rem 0 1rem;
+      padding: 3.5rem 0 1.5rem;
       color: var(--text-muted);
+      font-family: var(--font-mono);
       font-size: 0.85rem;
-      font-family: 'Fira Code', monospace;
     }
   </style>
 </head>
 <body>
 
-  <!-- Particle Effect Background -->
-  <canvas id="particles-canvas"></canvas>
+  <!-- Ambient Backdrop Lights -->
+  <div class="ambient-glow glow-1"></div>
+  <div class="ambient-glow glow-2"></div>
+
+  <!-- Particle & Matrix Background Canvas Engines -->
+  <canvas id="bg-canvas"></canvas>
+  <canvas id="matrix-canvas"></canvas>
 
   <div class="container">
 
-    <!-- Header Section -->
-    <header class="glass-card">
-      <div class="profile-frame">
-        <div class="profile-glow"></div>
-        <img src="mysite.jpg" alt="Sayan Biswas" class="profile-img">
+    <!-- 1. HEADER MODULE -->
+    <header class="hud-card">
+      <div class="avatar-container">
+        <div class="avatar-ring"></div>
+        <img src="mysite.jpg" alt="Sayan Biswas" class="avatar-img">
       </div>
-      <h1 class="title-wrapper">Sayan Biswas</h1>
-      <div class="dynamic-sub">
+      <h1 class="title-cyber">Sayan Biswas</h1>
+      <div class="typewriter-text">
         <span id="typewriter"></span>
+      </div>
+
+      <div class="hud-controls">
+        <div class="control-pill"><div class="dot-online"></div> SYSTEM ONLINE</div>
+        <div class="control-pill" onclick="toggleMatrix()">🟢 MATRIX RAIN</div>
+        <div class="control-pill" onclick="openModal()">⚡ QUICK BIO</div>
       </div>
     </header>
 
-    <!-- Editor Recruitment Alert -->
-    <div class="glass-card hiring-card">
-      <div class="card-title">⚡ <span>RECRUITING: Video Editor</span></div>
-      <p style="color: var(--text-muted); line-height: 1.8;">
-        I am actively searching for a high-level <strong>Video Editor</strong> to partner on AMV (Anime Music Video) production and visual projects. Key requirements: frame-accurate sync, smooth transitions, motion effects, and visual storytelling skills.
-      </p>
-    </div>
-
-    <!-- About Me Section -->
-    <div class="glass-card">
-      <div class="card-title">🚀 <span>System Core // Bio</span></div>
-      <p style="color: var(--text-muted); line-height: 1.8;">
-        Focused software engineer in training and digital content creator. Driven by deep focus and analytical problem solving, I bridge clean code architecture, content curation, and deal facilitation.
-      </p>
-    </div>
-
-    <!-- Interactive Skills & Competencies -->
-    <div class="glass-card">
-      <div class="card-title">🛠️ <span>Technical & Creative Metrics</span></div>
-      
-      <div class="skill-bar-wrapper">
-        <div class="skill-info">
-          <span>AMV Production & Sync</span>
-          <span style="color: var(--accent-cyan);">90%</span>
-        </div>
-        <div class="progress-line"><span style="width: 90%;"></span></div>
+    <!-- 2. CLI TERMINAL ENGINE -->
+    <div class="hud-card">
+      <div style="margin-bottom: 1rem; display: flex; justify-content: space-between; align-items: center;">
+        <h3 style="font-size: 1.15rem; color: var(--accent-cyan); font-family: var(--font-mono);">⌨️ Command Line System Engine</h3>
+        <span style="font-size: 0.8rem; color: var(--text-muted); font-family: var(--font-mono);">Type 'help'</span>
       </div>
-
-      <div class="skill-bar-wrapper">
-        <div class="skill-info">
-          <span>Deal Facilitation & Strategy</span>
-          <span style="color: var(--accent-purple);">85%</span>
+      <div class="terminal-box">
+        <div class="terminal-bar">
+          <span class="t-btn t-close"></span>
+          <span class="t-btn t-min"></span>
+          <span class="t-btn t-max"></span>
+          <span style="font-size: 0.8rem; color: var(--text-muted); margin-left: auto;">sayan@system-core:~</span>
         </div>
-        <div class="progress-line"><span style="width: 85%;"></span></div>
-      </div>
-
-      <div class="skill-bar-wrapper">
-        <div class="skill-info">
-          <span>Software Engineering & Web Architecture</span>
-          <span style="color: var(--accent-pink);">75%</span>
+        <div class="terminal-content" id="terminal-output">
+          <div class="term-line">Initializing SayanOS Cyber-Suite v5.0...</div>
+          <div class="term-line">Type <span style="color: #a855f7;">'help'</span> to show available system commands.</div>
         </div>
-        <div class="progress-line"><span style="width: 75%;"></span></div>
+        <div style="padding: 0 1.5rem 1.2rem;">
+          <div class="term-input-row">
+            <span style="color: #22c55e;">guest@sayan-hub:~$</span>
+            <input type="text" id="terminal-input" class="term-field" autofocus autocomplete="off">
+          </div>
+        </div>
       </div>
     </div>
 
-    <!-- Focus Modules Grid -->
-    <div class="glass-card">
-      <div class="card-title">📦 <span>Core Focus & Projects</span></div>
-      <div class="project-grid">
+    <!-- 3. RECRUITMENT HUD -->
+    <div class="hud-card recruitment-card">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; flex-wrap: wrap; gap: 1rem;">
+        <h2 style="color: #c084fc; font-size: 1.4rem; font-family: var(--font-cyber);">🎬 URGENT: Video Editor Recruitment</h2>
         
-        <div class="project-card">
-          <span class="project-tag">MEDIA CREATION</span>
-          <h4>AMV Content Hub</h4>
-          <p>Curating high-tempo anime music videos with focus on beat syncing, color grading, and dynamic pacing.</p>
+        <div class="eq-container">
+          <div class="eq-bar" style="animation-delay: 0.1s;"></div>
+          <div class="eq-bar" style="animation-delay: 0.3s;"></div>
+          <div class="eq-bar" style="animation-delay: 0.2s;"></div>
+          <div class="eq-bar" style="animation-delay: 0.5s;"></div>
+          <div class="eq-bar" style="animation-delay: 0.4s;"></div>
+        </div>
+      </div>
+      <p style="color: var(--text-muted); line-height: 1.8;">
+        I am actively seeking a dedicated <strong>Video Editor</strong> to collaborate on high-tempo Anime Music Video (AMV) productions. Requirements include frame-accurate audio sync, fluid scene transitions, color grading, and dynamic motion effects.
+      </p>
+    </div>
+
+    <!-- 4. PROJECT Showcase & FILTER TABS -->
+    <div class="hud-card">
+      <h2 style="font-size: 1.4rem; margin-bottom: 1.25rem; font-family: var(--font-cyber); color: var(--accent-cyan);">🚀 Portfolio Modules</h2>
+
+      <div class="filter-menu">
+        <button class="tab-btn active" onclick="filterProjects('all')">ALL MODULES</button>
+        <button class="tab-btn" onclick="filterProjects('media')">AMV MEDIA</button>
+        <button class="tab-btn" onclick="filterProjects('deals')">DEALMAKING</button>
+        <button class="tab-btn" onclick="filterProjects('dev')">DEVELOPMENT</button>
+      </div>
+
+      <div class="project-grid">
+        <div class="project-card" data-category="media">
+          <span class="card-tag">CREATIVE MEDIA</span>
+          <h3 style="margin-bottom: 0.4rem;">AMV Production Hub</h3>
+          <p style="font-size: 0.88rem; color: var(--text-muted); line-height: 1.6;">Precision-synced anime music videos featuring beat tracking and scene composition.</p>
         </div>
 
-        <div class="project-card">
-          <span class="project-tag">OPERATIONS</span>
-          <h4>Intermediary Dealmaking</h4>
-          <p>Handling communications, contract negotiations, and connecting collaborators efficiently.</p>
+        <div class="project-card" data-category="deals">
+          <span class="card-tag">OPERATIONS</span>
+          <h3 style="margin-bottom: 0.4rem;">Intermediary Negotiation</h3>
+          <p style="font-size: 0.88rem; color: var(--text-muted); line-height: 1.6;">Facilitating smooth deal structures and connecting collaborative partners efficiently.</p>
         </div>
 
-        <div class="project-card">
-          <span class="project-tag">DEVELOPMENT</span>
-          <h4>Full-Stack Engineering</h4>
-          <p>Building responsive web systems, working with modern JavaScript engines, and clean UI engineering.</p>
+        <div class="project-card" data-category="dev">
+          <span class="card-tag">ENGINEERING</span>
+          <h3 style="margin-bottom: 0.4rem;">Full-Stack Development</h3>
+          <p style="font-size: 0.88rem; color: var(--text-muted); line-height: 1.6;">Building high-speed web apps with clean architecture and modern JavaScript engines.</p>
         </div>
-
       </div>
     </div>
 
-    <!-- Contact CTA -->
-    <div class="glass-card" style="text-align: center;">
-      <div class="card-title" style="justify-content: center;">📬 <span>Initialize Contact</span></div>
-      <p style="color: var(--text-muted); margin-bottom: 0.5rem;">Have editing work to show or want to discuss a project collaboration?</p>
-      <a href="mailto:SayanTechWorld.STW13711@gmail.com" class="btn-neon">SEND DIRECT EMAIL</a>
+    <!-- 5. CONTACT & DISPATCH -->
+    <div class="hud-card" style="text-align: center;">
+      <h2 style="font-size: 1.6rem; margin-bottom: 0.75rem; font-family: var(--font-cyber);">📬 Initialize Communication</h2>
+      <p style="color: var(--text-muted); margin-bottom: 1.8rem;">Interested in joining as an editor, structuring a deal, or working on software projects?</p>
+      <a href="mailto:SayanTechWorld.STW13711@gmail.com" class="btn-action">
+        <span>SEND DIRECT EMAIL</span> ➔
+      </a>
     </div>
 
     <footer>
-      <p>SYS.BUILD // 2026 • DESIGNED BY SAYAN BISWAS</p>
+      <p>SYS.BUILD // 2026 • DESIGNED & CODED BY SAYAN BISWAS</p>
     </footer>
 
   </div>
 
-  <!-- Interactive Background Canvas & Typewriter Script -->
+  <!-- POPUP MODAL -->
+  <div class="modal-overlay" id="modal">
+    <div class="modal-card">
+      <h3 style="color: var(--accent-cyan); font-family: var(--font-cyber); margin-bottom: 1rem;">⚡ System Overview</h3>
+      <p style="color: var(--text-muted); line-height: 1.7; margin-bottom: 1.5rem;">
+        Hello! I'm Sayan Biswas. I combine software engineering fundamentals with high-impact visual media creation and deal negotiation.
+      </p>
+      <button class="btn-action" style="padding: 0.6rem 1.5rem; font-size: 0.85rem;" onclick="closeModal()">CLOSE PANEL</button>
+    </div>
+  </div>
+
+  <!-- ==========================================================================
+     9. MULTI-ENGINE JAVASCRIPT ARCHITECTURE
+     ========================================================================== -->
   <script>
-    // --- Typewriter Effect ---
-    const words = ["> Software Engineer in Training_", "> AMV Content Producer_", "> Deal Strategist & Negotiator_"];
-    let i = 0;
-    let timer;
+    // 1. TYPEWRITER ENGINE
+    const phrases = [
+      "> Software Developer & Architect_",
+      "> AMV Content Creator & Director_",
+      "> Strategic Negotiator & Facilitator_"
+    ];
+    let pIdx = 0;
 
-    function typingEffect() {
-      let word = words[i].split("");
-      var loopTyping = function() {
-        if (word.length > 0) {
-          document.getElementById('typewriter').innerHTML += word.shift();
+    function typewriter() {
+      let current = phrases[pIdx].split("");
+      let type = () => {
+        if (current.length > 0) {
+          document.getElementById('typewriter').innerHTML += current.shift();
+          setTimeout(type, 65);
         } else {
-          setTimeout(deletingEffect, 2000);
-          return false;
+          setTimeout(erase, 2200);
         }
-        timer = setTimeout(loopTyping, 70);
       };
-      loopTyping();
+      type();
     }
 
-    function deletingEffect() {
-      let word = words[i].split("");
-      var loopDeleting = function() {
-        if (word.length > 0) {
-          word.pop();
-          document.getElementById('typewriter').innerHTML = words[i].substring(0, word.length);
+    function erase() {
+      let current = phrases[pIdx].split("");
+      let del = () => {
+        if (current.length > 0) {
+          current.pop();
+          document.getElementById('typewriter').innerHTML = phrases[pIdx].substring(0, current.length);
+          setTimeout(del, 35);
         } else {
-          if (words.length > (i + 1)) {
-            i++;
-          } else {
-            i = 0;
-          }
-          setTimeout(typingEffect, 500);
-          return false;
+          pIdx = (pIdx + 1) % phrases.length;
+          setTimeout(typewriter, 400);
         }
-        timer = setTimeout(loopDeleting, 40);
       };
-      loopDeleting();
+      del();
+    }
+    typewriter();
+
+    // 2. CLI TERMINAL ENGINE
+    const tInput = document.getElementById('terminal-input');
+    const tOut = document.getElementById('terminal-output');
+
+    tInput.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') {
+        const val = tInput.value.trim().toLowerCase();
+        printLine(`guest@sayan-hub:~$ ${tInput.value}`, '#fff');
+
+        switch(val) {
+          case 'help':
+            printLine('Commands: [about, skills, hiring, matrix, clear]', '#38bdf8');
+            break;
+          case 'about':
+            printLine('Sayan Biswas: Student, Tech Enthusiast, AMV Producer, and Negotiator.', '#94a3b8');
+            break;
+          case 'skills':
+            printLine('Skills: HTML/CSS/JS, AMV Sync, Deal Structuring, Logic Design.', '#a855f7');
+            break;
+          case 'hiring':
+            printLine('Status: ACTIVELY HIRING Video Editors for AMV collaboration.', '#22c55e');
+            break;
+          case 'matrix':
+            toggleMatrix();
+            printLine('Matrix rain toggled!', '#eab308');
+            break;
+          case 'clear':
+            tOut.innerHTML = '';
+            break;
+          default:
+            if(val !== '') printLine(`Unknown command: '${val}'. Type 'help'.`, '#ef4444');
+        }
+        tInput.value = '';
+        tOut.scrollTop = tOut.scrollHeight;
+      }
+    });
+
+    function printLine(text, color) {
+      const el = document.createElement('div');
+      el.className = 'term-line';
+      el.style.color = color;
+      el.innerText = text;
+      tOut.appendChild(el);
     }
 
-    typingEffect();
+    // 3. PROJECT FILTER TABS
+    function filterProjects(cat) {
+      document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+      event.target.classList.add('active');
 
-    // --- Interactive Floating Particles Canvas ---
-    const canvas = document.getElementById('particles-canvas');
+      document.querySelectorAll('.project-card').forEach(card => {
+        if (cat === 'all' || card.dataset.category === cat) {
+          card.style.display = 'block';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    }
+
+    // 4. MODAL ENGINE
+    function openModal() { document.getElementById('modal').classList.add('open'); }
+    function closeModal() { document.getElementById('modal').classList.remove('open'); }
+
+    // 5. INTERACTIVE PARTICLES ENGINE
+    const canvas = document.getElementById('bg-canvas');
     const ctx = canvas.getContext('2d');
-
-    function resizeCanvas() {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
-    }
-    resizeCanvas();
-    window.addEventListener('resize', resizeCanvas);
+    function resize() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
+    resize();
+    window.addEventListener('resize', resize);
 
     const particles = [];
-    const particleCount = 45;
-
-    class Particle {
-      constructor() {
-        this.x = Math.random() * canvas.width;
-        this.y = Math.random() * canvas.height;
-        this.vx = (Math.random() - 0.5) * 0.8;
-        this.vy = (Math.random() - 0.5) * 0.8;
-        this.radius = Math.random() * 2 + 1;
-      }
-
-      update() {
-        this.x += this.vx;
-        this.y += this.vy;
-
-        if (this.x < 0 || this.x > canvas.width) this.vx *= -1;
-        if (this.y < 0 || this.y > canvas.height) this.vy *= -1;
-      }
-
-      draw() {
-        ctx.beginPath();
-        ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-        ctx.fillStyle = 'rgba(56, 189, 248, 0.4)';
-        ctx.fill();
-      }
+    for (let i = 0; i < 50; i++) {
+      particles.push({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        vx: (Math.random() - 0.5) * 0.8,
+        vy: (Math.random() - 0.5) * 0.8,
+        r: Math.random() * 2 + 1
+      });
     }
 
-    for (let i = 0; i < particleCount; i++) {
-      particles.push(new Particle());
-    }
-
-    function animate() {
+    function renderParticles() {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
+      particles.forEach((p, i) => {
+        p.x += p.vx; p.y += p.vy;
+        if (p.x < 0 || p.x > canvas.width) p.vx *= -1;
+        if (p.y < 0 || p.y > canvas.height) p.vy *= -1;
 
-      for (let i = 0; i < particles.length; i++) {
-        particles[i].update();
-        particles[i].draw();
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+        ctx.fillStyle = 'rgba(56, 189, 248, 0.5)';
+        ctx.fill();
 
         for (let j = i + 1; j < particles.length; j++) {
-          const dx = particles[i].x - particles[j].x;
-          const dy = particles[i].y - particles[j].y;
-          const dist = Math.sqrt(dx * dx + dy * dy);
-
-          if (dist < 120) {
+          const p2 = particles[j];
+          const dist = Math.hypot(p.x - p2.x, p.y - p2.y);
+          if (dist < 130) {
             ctx.beginPath();
-            ctx.moveTo(particles[i].x, particles[i].y);
-            ctx.lineTo(particles[j].x, particles[j].y);
-            ctx.strokeStyle = `rgba(56, 189, 248, ${0.15 - dist / 800})`;
+            ctx.moveTo(p.x, p.y); ctx.lineTo(p2.x, p2.y);
+            ctx.strokeStyle = `rgba(168, 85, 247, ${0.2 - dist / 650})`;
             ctx.lineWidth = 0.8;
             ctx.stroke();
           }
         }
-      }
-      requestAnimationFrame(animate);
+      });
+      requestAnimationFrame(renderParticles);
     }
-    animate();
+    renderParticles();
+
+    // 6. MATRIX RAIN ENGINE
+    const mCanvas = document.getElementById('matrix-canvas');
+    const mCtx = mCanvas.getContext('2d');
+    function resizeMatrix() { mCanvas.width = window.innerWidth; mCanvas.height = window.innerHeight; }
+    resizeMatrix();
+
+    const mChars = '01101001010101';
+    const drops = Array(Math.floor(mCanvas.width / 20)).fill(1);
+
+    function renderMatrix() {
+      mCtx.fillStyle = 'rgba(2, 6, 23, 0.05)';
+      mCtx.fillRect(0, 0, mCanvas.width, mCanvas.height);
+      mCtx.fillStyle = '#22c55e';
+      mCtx.font = '15px monospace';
+
+      drops.forEach((y, i) => {
+        const text = mChars[Math.floor(Math.random() * mChars.length)];
+        mCtx.fillText(text, i * 20, y * 20);
+        if (y * 20 > mCanvas.height && Math.random() > 0.975) drops[i] = 0;
+        drops[i]++;
+      });
+      requestAnimationFrame(renderMatrix);
+    }
+    renderMatrix();
+
+    function toggleMatrix() {
+      const m = document.getElementById('matrix-canvas');
+      m.style.display = m.style.display === 'block' ? 'none' : 'block';
+    }
   </script>
 
 </body>
