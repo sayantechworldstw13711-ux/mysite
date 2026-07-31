@@ -3,18 +3,18 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Sayan Biswas | Creative Developer & Producer</title>
+  <title>Sayan Biswas | Portfolio & Hub</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;700&family=Plus+Jakarta+Sans:wght@300;400;600;700;800&display=swap" rel="stylesheet">
   
   <style>
     :root {
       --bg: #030712;
-      --card-bg: rgba(15, 23, 42, 0.65);
-      --card-border: rgba(56, 189, 248, 0.2);
+      --card-bg: rgba(15, 23, 42, 0.75);
+      --card-border: rgba(56, 189, 248, 0.18);
       --accent-cyan: #38bdf8;
-      --accent-purple: #a855f7;
+      --accent-purple: #8b5cf6;
       --accent-pink: #ec4899;
       --text-main: #f8fafc;
       --text-muted: #94a3b8;
@@ -35,86 +35,59 @@
       padding: 2rem 1rem;
     }
 
-    /* Background Animated Canvas Glows */
-    .bg-glow-1, .bg-glow-2 {
+    /* Background Interactive Particle Canvas */
+    #particles-canvas {
       position: fixed;
-      width: 400px;
-      height: 400px;
-      border-radius: 50%;
-      filter: blur(120px);
-      opacity: 0.35;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
       z-index: -1;
-      animation: floatBg 10s infinite alternate ease-in-out;
-    }
-
-    .bg-glow-1 {
-      top: -10%;
-      left: -10%;
-      background: var(--accent-purple);
-    }
-
-    .bg-glow-2 {
-      bottom: -10%;
-      right: -10%;
-      background: var(--accent-cyan);
-      animation-delay: -5s;
-    }
-
-    @keyframes floatBg {
-      0% { transform: translate(0, 0) scale(1); }
-      100% { transform: translate(60px, 80px) scale(1.2); }
+      pointer-events: none;
     }
 
     .container {
-      max-width: 850px;
+      max-width: 900px;
       margin: 0 auto;
       position: relative;
       z-index: 1;
     }
 
-    /* Glassmorphism Cards with Entrance Animation */
+    /* Glassmorphism Containers */
     .glass-card {
       background: var(--card-bg);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
       border: 1px solid var(--card-border);
       border-radius: 24px;
       padding: 2.5rem;
       margin-bottom: 2rem;
-      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.08);
       transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
       animation: fadeInUp 0.8s ease-out forwards;
       opacity: 0;
     }
 
     .glass-card:hover {
-      transform: translateY(-5px) scale(1.01);
-      border-color: rgba(56, 189, 248, 0.5);
-      box-shadow: 0 25px 60px rgba(56, 189, 248, 0.15);
+      transform: translateY(-4px);
+      border-color: rgba(56, 189, 248, 0.4);
+      box-shadow: 0 25px 60px rgba(56, 189, 248, 0.12);
     }
 
-    /* Staggered Animations */
+    /* Entrance Staggering */
     .glass-card:nth-child(1) { animation-delay: 0.1s; }
-    .glass-card:nth-child(2) { animation-delay: 0.3s; }
-    .glass-card:nth-child(3) { animation-delay: 0.5s; }
-    .glass-card:nth-child(4) { animation-delay: 0.7s; }
+    .glass-card:nth-child(2) { animation-delay: 0.25s; }
+    .glass-card:nth-child(3) { animation-delay: 0.4s; }
+    .glass-card:nth-child(4) { animation-delay: 0.55s; }
+    .glass-card:nth-child(5) { animation-delay: 0.7s; }
 
     @keyframes fadeInUp {
-      from {
-        opacity: 0;
-        transform: translateY(30px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
-    /* Animated Profile Header */
-    header {
-      text-align: center;
-      position: relative;
-    }
+    /* Header & Animated Profile Image */
+    header { text-align: center; }
 
     .profile-frame {
       position: relative;
@@ -123,33 +96,33 @@
     }
 
     .profile-img {
-      width: 150px;
-      height: 150px;
+      width: 155px;
+      height: 155px;
       border-radius: 50%;
       object-fit: cover;
       position: relative;
       z-index: 2;
-      border: 2px solid rgba(255, 255, 255, 0.2);
+      border: 2px solid rgba(255, 255, 255, 0.25);
       animation: floatImage 4s ease-in-out infinite;
     }
 
     .profile-glow {
       position: absolute;
-      top: -5px;
-      left: -5px;
-      right: -5px;
-      bottom: -5px;
+      top: -8px;
+      left: -8px;
+      right: -8px;
+      bottom: -8px;
       background: linear-gradient(45deg, var(--accent-cyan), var(--accent-purple), var(--accent-pink));
       border-radius: 50%;
       z-index: 1;
-      filter: blur(15px);
-      opacity: 0.7;
+      filter: blur(18px);
+      opacity: 0.75;
       animation: rotateGlow 6s linear infinite;
     }
 
     @keyframes floatImage {
       0%, 100% { transform: translateY(0px) rotate(0deg); }
-      50% { transform: translateY(-12px) rotate(2deg); }
+      50% { transform: translateY(-10px) rotate(1.5deg); }
     }
 
     @keyframes rotateGlow {
@@ -157,44 +130,28 @@
       100% { transform: rotate(360deg); }
     }
 
-    /* Typewriter Animated Title */
     .title-wrapper {
       font-size: 2.8rem;
       font-weight: 800;
       letter-spacing: -0.03em;
-      margin-bottom: 0.5rem;
+      margin-bottom: 0.4rem;
       background: linear-gradient(135deg, #ffffff 0%, var(--accent-cyan) 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
 
-    .typing-text {
+    .dynamic-sub {
       font-family: 'Fira Code', monospace;
       font-size: 1.05rem;
       color: var(--accent-cyan);
-      display: inline-block;
-      overflow: hidden;
-      white-space: nowrap;
-      border-right: 2px solid var(--accent-cyan);
-      animation: typing 3.5s steps(35, end) infinite, blink 0.75s step-end infinite;
-    }
-
-    @keyframes typing {
-      0%, 10% { width: 0; }
-      70%, 90% { width: 100%; }
-      100% { width: 0; }
-    }
-
-    @keyframes blink {
-      from, to { border-color: transparent; }
-      50% { border-color: var(--accent-cyan); }
+      min-height: 28px;
     }
 
     /* Section Headings */
     .card-title {
-      font-size: 1.3rem;
+      font-size: 1.35rem;
       font-weight: 700;
-      margin-bottom: 1.2rem;
+      margin-bottom: 1.25rem;
       display: flex;
       align-items: center;
       gap: 0.75rem;
@@ -207,10 +164,10 @@
       -webkit-text-fill-color: transparent;
     }
 
-    /* Hiring Banner - Cyber Style */
+    /* Hiring Announcement Box */
     .hiring-card {
-      border: 1px solid rgba(168, 85, 247, 0.4);
-      background: linear-gradient(135deg, rgba(168, 85, 247, 0.1) 0%, rgba(56, 189, 248, 0.05) 100%);
+      border: 1px solid rgba(139, 92, 246, 0.4);
+      background: linear-gradient(135deg, rgba(139, 92, 246, 0.12) 0%, rgba(56, 189, 248, 0.05) 100%);
       position: relative;
       overflow: hidden;
     }
@@ -222,64 +179,108 @@
       left: -100%;
       width: 100%;
       height: 100%;
-      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
-      animation: shimmer 3s infinite;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.12), transparent);
+      animation: shimmer 3.5s infinite;
     }
 
     @keyframes shimmer {
       100% { left: 100%; }
     }
 
-    /* Skill Cards Grid */
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 1.25rem;
-    }
-
-    .grid-item {
-      background: rgba(30, 41, 59, 0.4);
-      border: 1px solid rgba(255, 255, 255, 0.05);
-      padding: 1.25rem;
-      border-radius: 16px;
-      transition: 0.3s;
-    }
-
-    .grid-item:hover {
-      background: rgba(56, 189, 248, 0.1);
-      border-color: var(--accent-cyan);
-    }
-
-    .grid-item h4 {
-      color: var(--accent-cyan);
+    /* Skill Bars */
+    .skill-bar-wrapper { margin-bottom: 1.25rem; }
+    .skill-bar-wrapper:last-child { margin-bottom: 0; }
+    
+    .skill-info {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.9rem;
       font-family: 'Fira Code', monospace;
-      font-size: 0.95rem;
       margin-bottom: 0.4rem;
     }
 
-    /* Neon Button */
+    .progress-line {
+      height: 8px;
+      width: 100%;
+      background: rgba(255, 255, 255, 0.08);
+      border-radius: 100px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .progress-line span {
+      height: 100%;
+      display: block;
+      border-radius: 100px;
+      background: linear-gradient(90deg, var(--accent-cyan), var(--accent-purple));
+    }
+
+    /* Project / Portfolio Display Grid */
+    .project-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.25rem;
+    }
+
+    .project-card {
+      background: rgba(30, 41, 59, 0.45);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      padding: 1.5rem;
+      border-radius: 18px;
+      transition: all 0.3s ease;
+    }
+
+    .project-card:hover {
+      background: rgba(56, 189, 248, 0.08);
+      border-color: var(--accent-cyan);
+      transform: translateY(-2px);
+    }
+
+    .project-tag {
+      font-family: 'Fira Code', monospace;
+      font-size: 0.75rem;
+      color: var(--accent-cyan);
+      background: rgba(56, 189, 248, 0.1);
+      padding: 0.2rem 0.6rem;
+      border-radius: 6px;
+      display: inline-block;
+      margin-bottom: 0.75rem;
+    }
+
+    .project-card h4 {
+      font-size: 1.1rem;
+      margin-bottom: 0.4rem;
+    }
+
+    .project-card p {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    /* Glowing Action Button */
     .btn-neon {
       display: inline-block;
-      padding: 0.9rem 2rem;
-      border-radius: 12px;
+      padding: 0.95rem 2.2rem;
+      border-radius: 14px;
       background: linear-gradient(135deg, var(--accent-cyan), var(--accent-purple));
       color: #030712;
       font-weight: 800;
       text-decoration: none;
       letter-spacing: 0.5px;
-      box-shadow: 0 0 20px rgba(56, 189, 248, 0.4);
+      box-shadow: 0 0 25px rgba(56, 189, 248, 0.35);
       transition: all 0.3s ease;
       margin-top: 1rem;
     }
 
     .btn-neon:hover {
-      transform: translateY(-3px) scale(1.03);
-      box-shadow: 0 0 35px rgba(168, 85, 247, 0.6);
+      transform: translateY(-3px) scale(1.02);
+      box-shadow: 0 0 40px rgba(139, 92, 246, 0.6);
     }
 
     footer {
       text-align: center;
-      padding: 2rem 0;
+      padding: 2.5rem 0 1rem;
       color: var(--text-muted);
       font-size: 0.85rem;
       font-family: 'Fira Code', monospace;
@@ -288,63 +289,98 @@
 </head>
 <body>
 
-  <!-- Background Animated Lights -->
-  <div class="bg-glow-1"></div>
-  <div class="bg-glow-2"></div>
+  <!-- Particle Effect Background -->
+  <canvas id="particles-canvas"></canvas>
 
   <div class="container">
 
-    <!-- Profile Header -->
+    <!-- Header Section -->
     <header class="glass-card">
       <div class="profile-frame">
         <div class="profile-glow"></div>
         <img src="mysite.jpg" alt="Sayan Biswas" class="profile-img">
       </div>
       <h1 class="title-wrapper">Sayan Biswas</h1>
-      <div style="height: 30px;">
-        <p class="typing-text">> Developer & AMV Content Producer_</p>
+      <div class="dynamic-sub">
+        <span id="typewriter"></span>
       </div>
     </header>
 
-    <!-- Hiring Opportunity -->
+    <!-- Editor Recruitment Alert -->
     <div class="glass-card hiring-card">
       <div class="card-title">⚡ <span>RECRUITING: Video Editor</span></div>
-      <p style="color: var(--text-muted); line-height: 1.7;">
-        Actively seeking a high-caliber <strong>Video Editor</strong> for high-energy AMV (Anime Music Video) production. Must have strong audio synchronization, dynamic pacing, and motion tracking skills.
-      </p>
-    </div>
-
-    <!-- About Me -->
-    <div class="glass-card">
-      <div class="card-title">🚀 <span>System Core // About</span></div>
       <p style="color: var(--text-muted); line-height: 1.8;">
-        Driven by deep focus, analytical execution, and modern software development practices. I specialize in bridging technical software engineering with high-impact visual storytelling and deal-making leadership.
+        I am actively searching for a high-level <strong>Video Editor</strong> to partner on AMV (Anime Music Video) production and visual projects. Key requirements: frame-accurate sync, smooth transitions, motion effects, and visual storytelling skills.
       </p>
     </div>
 
-    <!-- Skill Grid -->
+    <!-- About Me Section -->
     <div class="glass-card">
-      <div class="card-title">🛠️ <span>Capabilities & Skillset</span></div>
-      <div class="grid">
-        <div class="grid-item">
-          <h4>01. Deal Facilitation</h4>
-          <p style="font-size: 0.88rem; color: var(--text-muted);">Strategic negotiation, bridging communication, and closing operational agreements.</p>
+      <div class="card-title">🚀 <span>System Core // Bio</span></div>
+      <p style="color: var(--text-muted); line-height: 1.8;">
+        Focused software engineer in training and digital content creator. Driven by deep focus and analytical problem solving, I bridge clean code architecture, content curation, and deal facilitation.
+      </p>
+    </div>
+
+    <!-- Interactive Skills & Competencies -->
+    <div class="glass-card">
+      <div class="card-title">🛠️ <span>Technical & Creative Metrics</span></div>
+      
+      <div class="skill-bar-wrapper">
+        <div class="skill-info">
+          <span>AMV Production & Sync</span>
+          <span style="color: var(--accent-cyan);">90%</span>
         </div>
-        <div class="grid-item">
-          <h4>02. AMV Production</h4>
-          <p style="font-size: 0.88rem; color: var(--text-muted);">Frame-accurate visual pacing, audio sync, and scene sequencing expertise.</p>
+        <div class="progress-line"><span style="width: 90%;"></span></div>
+      </div>
+
+      <div class="skill-bar-wrapper">
+        <div class="skill-info">
+          <span>Deal Facilitation & Strategy</span>
+          <span style="color: var(--accent-purple);">85%</span>
         </div>
-        <div class="grid-item">
-          <h4>03. Software Architecture</h4>
-          <p style="font-size: 0.88rem; color: var(--text-muted);">Building clean, modern web applications and expanding core programming skills.</p>
+        <div class="progress-line"><span style="width: 85%;"></span></div>
+      </div>
+
+      <div class="skill-bar-wrapper">
+        <div class="skill-info">
+          <span>Software Engineering & Web Architecture</span>
+          <span style="color: var(--accent-pink);">75%</span>
         </div>
+        <div class="progress-line"><span style="width: 75%;"></span></div>
+      </div>
+    </div>
+
+    <!-- Focus Modules Grid -->
+    <div class="glass-card">
+      <div class="card-title">📦 <span>Core Focus & Projects</span></div>
+      <div class="project-grid">
+        
+        <div class="project-card">
+          <span class="project-tag">MEDIA CREATION</span>
+          <h4>AMV Content Hub</h4>
+          <p>Curating high-tempo anime music videos with focus on beat syncing, color grading, and dynamic pacing.</p>
+        </div>
+
+        <div class="project-card">
+          <span class="project-tag">OPERATIONS</span>
+          <h4>Intermediary Dealmaking</h4>
+          <p>Handling communications, contract negotiations, and connecting collaborators efficiently.</p>
+        </div>
+
+        <div class="project-card">
+          <span class="project-tag">DEVELOPMENT</span>
+          <h4>Full-Stack Engineering</h4>
+          <p>Building responsive web systems, working with modern JavaScript engines, and clean UI engineering.</p>
+        </div>
+
       </div>
     </div>
 
     <!-- Contact CTA -->
     <div class="glass-card" style="text-align: center;">
-      <div class="card-title" style="justify-content: center;">📬 <span>Initialize Connection</span></div>
-      <p style="color: var(--text-muted);">Interested in joining as an editor or discussing potential collaborations?</p>
+      <div class="card-title" style="justify-content: center;">📬 <span>Initialize Contact</span></div>
+      <p style="color: var(--text-muted); margin-bottom: 0.5rem;">Have editing work to show or want to discuss a project collaboration?</p>
       <a href="mailto:SayanTechWorld.STW13711@gmail.com" class="btn-neon">SEND DIRECT EMAIL</a>
     </div>
 
@@ -353,6 +389,119 @@
     </footer>
 
   </div>
+
+  <!-- Interactive Background Canvas & Typewriter Script -->
+  <script>
+    // --- Typewriter Effect ---
+    const words = ["> Software Engineer in Training_", "> AMV Content Producer_", "> Deal Strategist & Negotiator_"];
+    let i = 0;
+    let timer;
+
+    function typingEffect() {
+      let word = words[i].split("");
+      var loopTyping = function() {
+        if (word.length > 0) {
+          document.getElementById('typewriter').innerHTML += word.shift();
+        } else {
+          setTimeout(deletingEffect, 2000);
+          return false;
+        }
+        timer = setTimeout(loopTyping, 70);
+      };
+      loopTyping();
+    }
+
+    function deletingEffect() {
+      let word = words[i].split("");
+      var loopDeleting = function() {
+        if (word.length > 0) {
+          word.pop();
+          document.getElementById('typewriter').innerHTML = words[i].substring(0, word.length);
+        } else {
+          if (words.length > (i + 1)) {
+            i++;
+          } else {
+            i = 0;
+          }
+          setTimeout(typingEffect, 500);
+          return false;
+        }
+        timer = setTimeout(loopDeleting, 40);
+      };
+      loopDeleting();
+    }
+
+    typingEffect();
+
+    // --- Interactive Floating Particles Canvas ---
+    const canvas = document.getElementById('particles-canvas');
+    const ctx = canvas.getContext('2d');
+
+    function resizeCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+    resizeCanvas();
+    window.addEventListener('resize', resizeCanvas);
+
+    const particles = [];
+    const particleCount = 45;
+
+    class Particle {
+      constructor() {
+        this.x = Math.random() * canvas.width;
+        this.y = Math.random() * canvas.height;
+        this.vx = (Math.random() - 0.5) * 0.8;
+        this.vy = (Math.random() - 0.5) * 0.8;
+        this.radius = Math.random() * 2 + 1;
+      }
+
+      update() {
+        this.x += this.vx;
+        this.y += this.vy;
+
+        if (this.x < 0 || this.x > canvas.width) this.vx *= -1;
+        if (this.y < 0 || this.y > canvas.height) this.vy *= -1;
+      }
+
+      draw() {
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+        ctx.fillStyle = 'rgba(56, 189, 248, 0.4)';
+        ctx.fill();
+      }
+    }
+
+    for (let i = 0; i < particleCount; i++) {
+      particles.push(new Particle());
+    }
+
+    function animate() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      for (let i = 0; i < particles.length; i++) {
+        particles[i].update();
+        particles[i].draw();
+
+        for (let j = i + 1; j < particles.length; j++) {
+          const dx = particles[i].x - particles[j].x;
+          const dy = particles[i].y - particles[j].y;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+
+          if (dist < 120) {
+            ctx.beginPath();
+            ctx.moveTo(particles[i].x, particles[i].y);
+            ctx.lineTo(particles[j].x, particles[j].y);
+            ctx.strokeStyle = `rgba(56, 189, 248, ${0.15 - dist / 800})`;
+            ctx.lineWidth = 0.8;
+            ctx.stroke();
+          }
+        }
+      }
+      requestAnimationFrame(animate);
+    }
+    animate();
+  </script>
 
 </body>
 </html>
