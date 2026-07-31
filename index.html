@@ -43,6 +43,16 @@
       margin-bottom: 2rem;
     }
 
+    .profile-img {
+      width: 140px;
+      height: 140px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 4px solid var(--accent);
+      margin-bottom: 1rem;
+      box-shadow: 0 4px 12px rgba(56, 189, 248, 0.2);
+    }
+
     header h1 {
       font-size: 2.5rem;
       font-weight: 700;
@@ -129,8 +139,9 @@
 
 <div class="container">
 
-  <!-- Header Section -->
+  <!-- Header Section with Profile Photo -->
   <header>
+    <img src="mysite.jpg" alt="Sayan Biswas" class="profile-img">
     <h1>Sayan Biswas</h1>
     <div class="subtitle">Aspiring Software Engineer & AMV Content Creator</div>
   </header>
